@@ -4,13 +4,16 @@ import com.km.bank.model.Compte;
 import com.km.bank.model.Operation;
 import com.km.bank.model.Personne;
 
+import java.util.Date;
 import java.util.List;
 
 public class OperationServiceImpl implements OperationService {
+    HistoryAccountService service = new HistoryAccountServiceImpl();
     @Override
     public void deposer(Compte compte, double montant) {
         if (compte != null) {
             compte.setSolde(compte.getSolde() +montant);
+            service.saveOperation(new Operation(TypeOperationEnum.CREDIT, new Date(), montant, compte) );
         }
     }
 
@@ -19,6 +22,7 @@ public class OperationServiceImpl implements OperationService {
         if (compte != null ) {
             if (compte.getSolde() - montant > 0){
                 compte.setSolde(compte.getSolde() - montant);
+                service.saveOperation(new Operation(TypeOperationEnum.DEBIT, new Date(), montant, compte) );
             }else{
                 throw  new Exception("Solde insuffisant");
             }
