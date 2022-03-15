@@ -15,10 +15,12 @@ public class OperationServiceImpl implements OperationService {
     }
 
     @Override
-    public void retirer(Compte compte, double montant) {
+    public void retirer(Compte compte, double montant) throws Exception {
         if (compte != null ) {
             if (compte.getSolde() - montant > 0){
                 compte.setSolde(compte.getSolde() - montant);
+            }else{
+                throw  new Exception("Solde insuffisant");
             }
         }
     }
@@ -28,7 +30,7 @@ public class OperationServiceImpl implements OperationService {
         return  compte.getOperations();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Personne personne = new Personne(Integer.valueOf(1), "Joe", "ToTO");
         Compte compte = new Compte(Integer.valueOf(1), "44522115555", 200d, personne);
         Personne personne2 = new Personne(Integer.valueOf(2), "Faro", "TATA");
