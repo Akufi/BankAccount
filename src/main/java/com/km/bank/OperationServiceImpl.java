@@ -13,7 +13,7 @@ public class OperationServiceImpl implements OperationService {
     public void deposer(Compte compte, double montant) {
         if (compte != null) {
             compte.setSolde(compte.getSolde() +montant);
-            service.saveOperation(new Operation(TypeOperationEnum.CREDIT, new Date(), montant, compte) );
+            service.saveOperation(compte, montant, TypeOperationEnum.CREDIT);
         }
     }
 
@@ -22,7 +22,7 @@ public class OperationServiceImpl implements OperationService {
         if (compte != null ) {
             if (compte.getSolde() - montant > 0){
                 compte.setSolde(compte.getSolde() - montant);
-                service.saveOperation(new Operation(TypeOperationEnum.DEBIT, new Date(), montant, compte) );
+                service.saveOperation(compte, montant, TypeOperationEnum.DEBIT);
             }else{
                 throw  new Exception("Solde insuffisant");
             }

@@ -26,8 +26,8 @@ public class HistoryAccountServiceImplTest {
 
     @Test
     public void saveOperation() {
-        service.saveOperation(new Operation(TypeOperationEnum.CREDIT, new Date(), 350d, compte ));
-        service.saveOperation(new Operation(TypeOperationEnum.CREDIT, new Date(), 1880d, compte ));
+        service.saveOperation(compte, 350d, TypeOperationEnum.CREDIT );
+        service.saveOperation(compte, 3870d, TypeOperationEnum.CREDIT);
         Assert.assertTrue(compte.getOperations().size() == 2 );
     }
 

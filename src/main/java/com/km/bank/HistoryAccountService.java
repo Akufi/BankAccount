@@ -5,7 +5,7 @@ import com.km.bank.model.Operation;
 
 public interface HistoryAccountService {
 
-    void saveOperation(Operation operation);
+    void saveOperation(Compte compte, double montant, TypeOperationEnum type);
 
     void printOperations(Compte compte);
 
